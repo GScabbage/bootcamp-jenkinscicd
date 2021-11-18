@@ -40,3 +40,29 @@ npm test
 - Got to post build actions, select Git Publisher and the merge results tickbox
 - Then build other projects and link to your Deployment
 ### Deploying to AWS Job
+- Do the standard job setup
+- Then go to build environment and select Provide Node & npm bin/ folder to PATH tickbox
+- Also in build environment select SSH Agent
+- Similarily to the SSH keys before but this time you are adding the key used for your AWS instance and copying that in
+- Next go to the Build section and select exectue shell and add the following
+```
+ssh -A -o "StrictHostKeyChecking=no" ubuntu@AWS.IP << EOF
+    su - root
+    ls
+    rm -rf github-repo-folder
+    git clone github-repo-https-link
+    cd github-repo-folder
+    ls
+    chmod 777 provision.sh
+    ./provision.sh
+    cd app
+    sudo apt install npm -y
+   	npm install
+    #npm start
+EOF
+```
+- This should be the full CICD jobs completed
+### Checking it all works
+- Finally get your github repo up
+- Push something to your dev branch
+- Watch as all the jobs are completed in order
