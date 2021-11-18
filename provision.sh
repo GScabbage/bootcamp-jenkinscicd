@@ -14,7 +14,7 @@ sudo apt-get install nodejs -y
 sudo npm install pm2 -g
 
 #Creates a environment variable and stores in .bashrc file
-sudo echo 'export DB_HOST="mongodb://192.168.10.150:27017/posts"' >> .bashrc
+sudo echo 'export DB_HOST="mongodb://54.171.91.58:27017/posts"' >> .bashrc
 source ~/.bashrc
 
 #Removes nginx default file and replaces with own default file from home dir
